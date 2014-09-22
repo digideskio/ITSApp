@@ -138,23 +138,6 @@ public class MainActivity extends ActionBarActivity
                 Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
             
-            new Thread(new Runnable() {
-				
-				@Override
-				public void run() {
-					// TODO Auto-generated method stub
-					StringBuilder json = new StringBuilder();
-		            DownloadManager.getJsonString("https://itunes.apple.com/jp/rss/topgrossingapplications/limit=10/json", json);
-		           
-		           FeedEntity entity =  FeedEntityFactory.getEntity(json.toString());
-		            
-		           System.out.println(json.toString());
-					
-				}
-			}).start();
-            
-            
-            
             return rootView;
         }
 
