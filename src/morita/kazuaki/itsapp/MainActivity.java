@@ -1,5 +1,10 @@
 package morita.kazuaki.itsapp;
 
+import com.google.gson.Gson;
+
+import morita.kazuaki.itsapp.entity.FeedEntity;
+import morita.kazuaki.itsapp.entity.FeedEntityFactory;
+import morita.kazuaki.itsapp.net.DownloadManager;
 import android.app.Activity;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
@@ -132,6 +137,24 @@ public class MainActivity extends ActionBarActivity
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+            
+            new Thread(new Runnable() {
+				
+				@Override
+				public void run() {
+					// TODO Auto-generated method stub
+					StringBuilder json = new StringBuilder();
+		            DownloadManager.getJsonString("https://itunes.apple.com/jp/rss/topgrossingapplications/limit=10/json", json);
+		           
+		           FeedEntity entity =  FeedEntityFactory.getEntity(json.toString());
+		            
+		           System.out.println(json.toString());
+					
+				}
+			}).start();
+            
+            
+            
             return rootView;
         }
 
