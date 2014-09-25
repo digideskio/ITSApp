@@ -37,28 +37,40 @@ public class ListAdapter extends ArrayAdapter<FeedEntity.Entry> {
 		mImageLoader = new ImageLoader(mQueue, new LruCacheSample());
 	}
 
+	public class ViewHolder {
+		public ImageView imageView;
+		public TextView name;
+		public TextView artist;
+		public TextView summary;
+
+	}
+
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
+		final ViewHolder holder;
 		if (convertView == null) {
 			convertView = layoutInflater_.inflate(R.layout.fragment_list_row,
 					null);
+			holder = new ViewHolder();
+			holder.imageView = (ImageView) convertView
+					.findViewById(R.id.rowImage);
+			holder.name = (TextView) convertView.findViewById(R.id.rowName);
+			holder.artist = (TextView) convertView.findViewById(R.id.rowArtist);
+			holder.summary = (TextView) convertView
+					.findViewById(R.id.rowSummary);
+			convertView.setTag(holder);
+		} else {
+			holder = (ViewHolder) convertView.getTag();
 		}
 
 		FeedEntity.Entry entry = (FeedEntity.Entry) getItem(position);
+		
+		holder.name.setText(entry.name.text);
+		holder.artist.setText(entry.artist.text);
+		holder.summary.setText(entry.summary.text);
 
-		TextView text = (TextView) convertView.findViewById(R.id.rowName);
-		text.setText(entry.name.text);
-
-		text = (TextView) convertView.findViewById(R.id.rowArtist);
-		text.setText(entry.artist.text);
-
-		text = (TextView) convertView.findViewById(R.id.rowSummary);
-		text.setText(entry.summary.text);
-
-		ImageView image = (ImageView) convertView.findViewById(R.id.rowImage);
-
-		ImageListener listener = ImageLoader.getImageListener(image,
-				android.R.drawable.spinner_background /* 表示待ち時の画像 */,
+		ImageListener listener = ImageLoader.getImageListener(holder.imageView,
+				R.drawable.ic_action_refresh/* 表示待ち時の画像 */,
 				android.R.drawable.ic_dialog_alert /* エラー時の画像 */);
 		System.out.println(Uri.parse(entry.image[entry.image.length - 1].text)
 				.getHost());
@@ -82,7 +94,7 @@ public class ListAdapter extends ArrayAdapter<FeedEntity.Entry> {
 				@Override
 				protected int sizeOf(String key, Bitmap bitmap) {
 					// 使用キャッシュサイズ(KB単位)
-					return bitmap.getByteCount() / 1024;
+					return bitmap.getRowBytes() * bitmap.getHeight();
 				}
 			};
 		}

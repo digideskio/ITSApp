@@ -2,49 +2,49 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal" >
+    android:orientation="horizontal"
+    android:paddingBottom="4dp"
+    android:paddingLeft="8dp"
+    android:paddingRight="8dp"
+    android:paddingTop="4dp" >
 
     <ImageView
         android:id="@+id/rowImage"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:contentDescription="Image"
-        android:padding="4dp" >
-
+        android:contentDescription="Image" >
     </ImageView>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="4dp" >
+        android:paddingLeft="8dp" >
 
         <TextView
             android:id="@+id/rowName"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Name"
+            android:layout_height="24dp"
+            android:ellipsize="end"
+            android:maxLines="1"
             android:textSize="20sp" >
-
         </TextView>
 
         <TextView
             android:id="@+id/rowArtist"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="artist" >
-
+            android:layout_height="20dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textSize="12sp" >
         </TextView>
-        
+
         <TextView
             android:id="@+id/rowSummary"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:ellipsize="end"
+            android:layout_height="40dp"
             android:maxLines="2"
-            android:minLines="2"
-            android:text="summaryfjjjjjjjjjjjjjjjjjjjjjfijefiwjisummaryfjjjjjjjjjjjjjjjjjjjjjfijefiwjisummaryfjjjjjjjjjjjjjjjjjjjjjfijefiwjisummaryfjjjjjjjjjjjjjjjjjjjjjfijefiwjisummaryfjjjjjjjjjjjjjjjjjjjjjfijefiwji" >
-
+            android:textSize="14sp" >
         </TextView>
     </LinearLayout>
 
