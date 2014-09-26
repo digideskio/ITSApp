@@ -1,6 +1,7 @@
 package morita.kazuaki.itsapp;
 
 import morita.kazuaki.itsapp.AppListFragment.OnFragmentInteractionListener;
+import morita.kazuaki.itsapp.manager.ContentsManager.ENUM_TYPE;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -42,30 +43,23 @@ public class MainActivity extends ActionBarActivity implements
 
 	@Override
 	public void onNavigationDrawerItemSelected(int position) {
-
-//		String url = "";
-//
-//		switch (position) {
-//		case 0:
-//			url = "https://itunes.apple.com/jp/rss/topgrossingapplications/limit=100/json";
-//			break;
-//		case 1:
-//			url = "https://itunes.apple.com/jp/rss/topfreemacapps/limit=100/json";
-//			break;
-//		case 2:
-//		default:
-//			url = "https://itunes.apple.com/jp/rss/topgrossingapplications/limit=100/json";
-//
-//			break;
-//
-//		}
 		
+		Fragment fragment;
+		switch (position) {
+		case 0:
+			fragment = ViewPagerFragment.newInstance(ENUM_TYPE.IOS);
+			break;
+		case 1:
+		default:
+			fragment = ViewPagerFragment.newInstance(ENUM_TYPE.MAC);
+			break;
+		}
 		
 		// update the main content by replacing fragments
 		FragmentManager fragmentManager = getSupportFragmentManager();
 		fragmentManager
 				.beginTransaction()
-				.replace(R.id.container, new ViewPagerFragment())
+				.replace(R.id.container, fragment)
 				.commit();
 	}
 

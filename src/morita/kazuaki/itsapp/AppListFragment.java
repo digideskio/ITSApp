@@ -1,9 +1,15 @@
 package morita.kazuaki.itsapp;
 
+import morita.kazuaki.itsapp.DetailActivity.DetailFragment;
 import morita.kazuaki.itsapp.entity.FeedEntity;
+import morita.kazuaki.itsapp.entity.FeedEntity.Entry;
 import morita.kazuaki.itsapp.entity.FeedEntityFactory;
+import morita.kazuaki.itsapp.util.Util;
+import static morita.kazuaki.itsapp.util.Util.nonNull;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ListFragment;
 import android.view.View;
 import android.widget.ListView;
@@ -33,10 +39,12 @@ public class AppListFragment extends ListFragment {
 	// TODO: Rename and change types of parameters
 	private String mParam1;
 	private String mParam2;
-	
+
 	private RequestQueue mQueue;
 
 	private OnFragmentInteractionListener mListener;
+
+	private FeedEntity entity;
 
 	// TODO: Rename and change types of parameters
 	public static AppListFragment newInstance(String param1, String param2) {
@@ -58,28 +66,27 @@ public class AppListFragment extends ListFragment {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
+
 		Bundle bundle;
-		
-		if(savedInstanceState != null){
-			bundle  = savedInstanceState;
-		} else  if (getArguments() != null) {
+
+		if (savedInstanceState != null) {
+			bundle = savedInstanceState;
+		} else if (getArguments() != null) {
 			bundle = getArguments();
 		} else {
 			bundle = new Bundle();
 		}
-		
+
 		mParam1 = bundle.getString(ARG_PARAM1);
 		mParam2 = bundle.getString(ARG_PARAM2);
-		
-		
+
 		mQueue = Volley.newRequestQueue(getActivity());
 		mQueue.add(new StringRequest(mParam1, new Listener<String>() {
 
 			@Override
 			public void onResponse(String jsonString) {
-				FeedEntity entity = FeedEntityFactory.getEntity(jsonString);
-				if(entity == null) {
+				entity = FeedEntityFactory.getEntity(jsonString);
+				if (entity == null) {
 					LogUtils.LOGW("JSON", "Json Parse Error");
 				}
 
@@ -94,13 +101,11 @@ public class AppListFragment extends ListFragment {
 			public void onErrorResponse(VolleyError arg0) {
 			}
 		}));
-		
-		
 
 		// TODO: Change Adapter to display your content
-//		setListAdapter(new ArrayAdapter<AppContent.AppItem>(getActivity(),
-//				android.R.layout.simple_list_item_1, android.R.id.text1,
-//				AppContent.ITEMS));
+		// setListAdapter(new ArrayAdapter<AppContent.AppItem>(getActivity(),
+		// android.R.layout.simple_list_item_1, android.R.id.text1,
+		// AppContent.ITEMS));
 	}
 
 	@Override
@@ -118,27 +123,50 @@ public class AppListFragment extends ListFragment {
 	public void onDetach() {
 		super.onDetach();
 		mListener = null;
+		mQueue.cancelAll(new Object());
 	}
 
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		super.onListItemClick(l, v, position, id);
 
-		if (null != mListener) {
-			// Notify the active callbacks interface (the activity, if the
-			// fragment is attached to one) that an item has been selected.
-			mListener
-					.onFragmentInteraction("");
+		// if (null != mListener) {
+		// // Notify the active callbacks interface (the activity, if the
+		// // fragment is attached to one) that an item has been selected.
+		// mListener.onFragmentInteraction("");
+		// }
+
+		Entry entry = entity.feed.entry[position];
+
+		Intent intent = new Intent(getActivity(), DetailActivity.class);
+
+		intent.putExtra(DetailFragment.ARG_NAME, nonNull(entry.name.text));
+		intent.putExtra(DetailFragment.ARG_ARTIST, nonNull(entry.artist.text));
+		intent.putExtra(DetailFragment.ARG_PRICE, nonNull(entry.price.text));
+		intent.putExtra(DetailFragment.ARG_IMAGE,
+				nonNull(entry.image[entry.image.length - 1].text));
+		intent.putExtra(DetailFragment.ARG_LINK,
+				nonNull(entry.link.attributes.href));
+		intent.putExtra(DetailFragment.ARG_CATEGORY,
+				nonNull(entry.category.attributes.label));
+		if (entry.summary != null) {
+			intent.putExtra(DetailFragment.ARG_SUMMARY,
+					nonNull(entry.summary.text));
 		}
+
+		startActivity(intent);
+
+		// getActivity().getSupportFragmentManager().beginTransaction()
+		// .replace(R.id.container, DetailFragment.newInstance(entry))
+		// .commit();
+
 	}
-	
+
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
 		outState = getArguments();
 		super.onSaveInstanceState(outState);
 	}
-	
-	
 
 	/**
 	 * This interface must be implemented by activities that contain this
@@ -153,5 +181,4 @@ public class AppListFragment extends ListFragment {
 		// TODO: Update argument type and name
 		public void onFragmentInteraction(String id);
 	}
-
 }

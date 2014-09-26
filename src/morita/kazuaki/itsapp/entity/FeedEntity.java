@@ -1,12 +1,23 @@
 package morita.kazuaki.itsapp.entity;
 
+import java.io.Serializable;
+
 import com.google.gson.annotations.SerializedName;
 
-public class FeedEntity {
+public class FeedEntity implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4136992893063798700L;
 	public Feed feed;
 
-	public class Feed {
+	public class Feed implements Serializable {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = -9085431754103835327L;
+
 		public Label id;
 		public Label icon;
 		public Author author;
@@ -17,30 +28,47 @@ public class FeedEntity {
 		public Label rights;
 	}
 
-	public class Author {
+	public class Author implements Serializable {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 3942535931197698884L;
 		public Label uri;
 		public Label name;
 	}
 
-	public class Attributes {
-		public String type;
-		public String href;
-		public String amount;
-		public String currency;
-		public String label;
-		public String scheme;
-		public String term;
+	public class Attributes implements Serializable {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 2382304265873850255L;
+		public String type = "";
+		public String href = "";
+		public String amount = "";
+		public String currency = "";
+		public String label = "";
+		public String scheme = "";
+		public String term = "";
 		@SerializedName("im:id")
-		public String id;
+		public String id = "";
 	}
 
-	public class LabelAndAttributes {
+	public class LabelAndAttributes implements Serializable {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 2180549900767081084L;
 		public Attributes attributes;
 		@SerializedName("label")
-		public String text;
+		public String text = "";
 	}
 
-	public class Entry {
+	public class Entry implements Serializable {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = -860801943212993324L;
+
 		@SerializedName("im:artist")
 		public LabelAndAttributes artist;
 		public LabelAndAttributes id;
@@ -61,9 +89,13 @@ public class FeedEntity {
 		public Label name;
 	}
 
-	public class Label {
+	public class Label implements Serializable {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 2006115764264656313L;
 		@SerializedName("label")
-		public String text;
+		public String text = "";
 	}
 
 }
