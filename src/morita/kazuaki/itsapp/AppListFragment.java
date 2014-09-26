@@ -14,6 +14,7 @@ import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.samples.apps.iosched.util.LogUtils;
 
 /**
  * A fragment representing a list of Items.
@@ -57,11 +58,19 @@ public class AppListFragment extends ListFragment {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
-		if (getArguments() != null) {
-			mParam1 = getArguments().getString(ARG_PARAM1);
-			mParam2 = getArguments().getString(ARG_PARAM2);
+		
+		Bundle bundle;
+		
+		if(savedInstanceState != null){
+			bundle  = savedInstanceState;
+		} else  if (getArguments() != null) {
+			bundle = getArguments();
+		} else {
+			bundle = new Bundle();
 		}
+		
+		mParam1 = bundle.getString(ARG_PARAM1);
+		mParam2 = bundle.getString(ARG_PARAM2);
 		
 		
 		mQueue = Volley.newRequestQueue(getActivity());
@@ -70,6 +79,9 @@ public class AppListFragment extends ListFragment {
 			@Override
 			public void onResponse(String jsonString) {
 				FeedEntity entity = FeedEntityFactory.getEntity(jsonString);
+				if(entity == null) {
+					LogUtils.LOGW("JSON", "Json Parse Error");
+				}
 
 				ListAdapter arrayAdapter = new ListAdapter(getActivity(), 0, 0,
 						entity.feed.entry, mQueue);
@@ -119,6 +131,14 @@ public class AppListFragment extends ListFragment {
 					.onFragmentInteraction("");
 		}
 	}
+	
+	@Override
+	public void onSaveInstanceState(Bundle outState) {
+		outState = getArguments();
+		super.onSaveInstanceState(outState);
+	}
+	
+	
 
 	/**
 	 * This interface must be implemented by activities that contain this

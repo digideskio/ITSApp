@@ -27,6 +27,11 @@ public class FeedEntity {
 		public String href;
 		public String amount;
 		public String currency;
+		public String label;
+		public String scheme;
+		public String term;
+		@SerializedName("im:id")
+		public String id;
 	}
 
 	public class LabelAndAttributes {
@@ -42,13 +47,13 @@ public class FeedEntity {
 		@SerializedName("im:price")
 		public LabelAndAttributes price;
 		public Label summary;
-		public Attributes category;
+		public LabelAndAttributes category;
 		public Label title;
 		@SerializedName("im:releaseDate")
 		public LabelAndAttributes releaseDate;
 		@SerializedName("im:image")
 		public LabelAndAttributes[] image;
-		public Attributes link;
+		public LabelAndAttributes link;
 		public Attributes rights;
 		@SerializedName("im:contentType")
 		public Attributes contentType;

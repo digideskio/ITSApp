@@ -41,7 +41,8 @@ public class ListAdapter extends ArrayAdapter<FeedEntity.Entry> {
 		public ImageView imageView;
 		public TextView name;
 		public TextView artist;
-		public TextView summary;
+		public TextView category;
+		public TextView no;
 
 	}
 
@@ -56,8 +57,9 @@ public class ListAdapter extends ArrayAdapter<FeedEntity.Entry> {
 					.findViewById(R.id.rowImage);
 			holder.name = (TextView) convertView.findViewById(R.id.rowName);
 			holder.artist = (TextView) convertView.findViewById(R.id.rowArtist);
-			holder.summary = (TextView) convertView
-					.findViewById(R.id.rowSummary);
+			holder.category = (TextView) convertView
+					.findViewById(R.id.rowCategory);
+			holder.no = (TextView) convertView.findViewById(R.id.rowNo);
 			convertView.setTag(holder);
 		} else {
 			holder = (ViewHolder) convertView.getTag();
@@ -67,7 +69,8 @@ public class ListAdapter extends ArrayAdapter<FeedEntity.Entry> {
 		
 		holder.name.setText(entry.name.text);
 		holder.artist.setText(entry.artist.text);
-		holder.summary.setText(entry.summary.text);
+		holder.category.setText(entry.category.attributes.label);
+		holder.no.setText(String.valueOf(position+1));
 
 		ImageListener listener = ImageLoader.getImageListener(holder.imageView,
 				R.drawable.ic_action_refresh/* 表示待ち時の画像 */,
