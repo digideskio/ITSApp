@@ -2,6 +2,7 @@ package morita.kazuaki.itsapp;
 
 import morita.kazuaki.itsapp.AppListFragment.OnFragmentInteractionListener;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -42,31 +43,29 @@ public class MainActivity extends ActionBarActivity implements
 	@Override
 	public void onNavigationDrawerItemSelected(int position) {
 
-		String url = "";
-
-		switch (position) {
-		case 0:
-			url = "https://itunes.apple.com/jp/rss/topgrossingapplications/limit=100/json";
-			break;
-		case 1:
-			url = "https://itunes.apple.com/jp/rss/topfreemacapps/limit=100/json";
-			break;
-		case 2:
-		default:
-			url = "https://itunes.apple.com/jp/rss/topgrossingapplications/limit=100/json";
-
-			break;
-
-		}
-
+//		String url = "";
+//
+//		switch (position) {
+//		case 0:
+//			url = "https://itunes.apple.com/jp/rss/topgrossingapplications/limit=100/json";
+//			break;
+//		case 1:
+//			url = "https://itunes.apple.com/jp/rss/topfreemacapps/limit=100/json";
+//			break;
+//		case 2:
+//		default:
+//			url = "https://itunes.apple.com/jp/rss/topgrossingapplications/limit=100/json";
+//
+//			break;
+//
+//		}
+		
+		
 		// update the main content by replacing fragments
 		FragmentManager fragmentManager = getSupportFragmentManager();
 		fragmentManager
 				.beginTransaction()
-				// .replace(R.id.container,
-				// PlaceholderFragment.newInstance(position + 1))
-//				.replace(R.id.container, ListFragment.newInstance(url, null))
-				.replace(R.id.container, AppListFragment.newInstance(url, null))
+				.replace(R.id.container, new ViewPagerFragment())
 				.commit();
 	}
 
