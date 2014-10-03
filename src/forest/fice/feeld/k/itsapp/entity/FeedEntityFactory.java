@@ -1,4 +1,4 @@
-package morita.kazuaki.itsapp.entity;
+package forest.fice.feeld.k.itsapp.entity;
 
 import java.io.StringReader;
 

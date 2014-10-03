@@ -1,4 +1,4 @@
-package morita.kazuaki.itsapp.util;
+package forest.fice.feeld.k.itsapp.util;
 
 public class Util {
 

@@ -1,4 +1,4 @@
-package morita.kazuaki.itsapp.net;
+package forest.fice.feeld.k.itsapp.net;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -16,20 +16,20 @@ import android.graphics.BitmapFactory;
 public class DownloadManager {
 
 	/**
-	 * URL‚ÌJSON•¶š—ñ‚ğæ“¾.
+	 * URLï¿½ï¿½JSONï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½æ“¾.
 	 * 
 	 * @param url
-	 *            @ƒŠƒNƒGƒXƒgURL
+	 *            ï¿½@ï¿½ï¿½ï¿½Nï¿½Gï¿½Xï¿½gURL
 	 * @param json
-	 *            ƒŒƒXƒ|ƒ“ƒXJSON
-	 * @return HTTPƒXƒe[ƒ^ƒXƒR[ƒh
+	 *            ï¿½ï¿½ï¿½Xï¿½|ï¿½ï¿½ï¿½XJSON
+	 * @return HTTPï¿½Xï¿½eï¿½[ï¿½^ï¿½Xï¿½Rï¿½[ï¿½h
 	 */
 	public static int getJsonString(String url, StringBuilder json) {
 		HttpResponse response;
 		try {
 			response = getResponse(url);
 		} catch (Exception e) {
-			// ‚È‚ñ‚©‚ ‚Á‚½‚çƒT[ƒo‚Ì‚¹‚¢‚É‚·‚é
+			// ï¿½È‚ñ‚©‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Tï¿½[ï¿½oï¿½Ì‚ï¿½ï¿½ï¿½ï¿½É‚ï¿½ï¿½ï¿½
 			return HttpStatus.SC_INTERNAL_SERVER_ERROR;
 		}
 
@@ -45,7 +45,7 @@ public class DownloadManager {
 			String data = outputStream.toString();
 			json.append(data);
 		} catch (IOException e) {
-			// ‚È‚ñ‚©‚ ‚Á‚½‚çƒT[ƒo‚Ì‚¹‚¢‚É‚·‚é
+			// ï¿½È‚ñ‚©‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Tï¿½[ï¿½oï¿½Ì‚ï¿½ï¿½ï¿½ï¿½É‚ï¿½ï¿½ï¿½
 			return HttpStatus.SC_INTERNAL_SERVER_ERROR;
 		}
 
@@ -57,7 +57,7 @@ public class DownloadManager {
 		try {
 			response = getResponse(url);
 		} catch (Exception e) {
-			// ‚È‚ñ‚©‚ ‚Á‚½‚çƒT[ƒo‚Ì‚¹‚¢‚É‚·‚é
+			// ï¿½È‚ñ‚©‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Tï¿½[ï¿½oï¿½Ì‚ï¿½ï¿½ï¿½ï¿½É‚ï¿½ï¿½ï¿½
 			return HttpStatus.SC_INTERNAL_SERVER_ERROR;
 		}
 
@@ -71,7 +71,7 @@ public class DownloadManager {
 			bitmap = BitmapFactory.decodeStream(response.getEntity()
 					.getContent());
 		} catch (Exception e) {
-			// ‚È‚ñ‚©‚ ‚Á‚½‚çƒT[ƒo‚Ì‚¹‚¢‚É‚·‚é
+			// ï¿½È‚ñ‚©‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Tï¿½[ï¿½oï¿½Ì‚ï¿½ï¿½ï¿½ï¿½É‚ï¿½ï¿½ï¿½
 			return HttpStatus.SC_INTERNAL_SERVER_ERROR;
 		}
 		return status;

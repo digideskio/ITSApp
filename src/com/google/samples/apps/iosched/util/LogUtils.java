@@ -17,7 +17,7 @@
 package com.google.samples.apps.iosched.util;
 
 
-import morita.kazuaki.itsapp.BuildConfig;
+import forest.fice.feeld.k.itsapp.BuildConfig;
 import android.util.Log;
 
 public class LogUtils {

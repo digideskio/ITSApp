@@ -1,11 +1,9 @@
-package morita.kazuaki.itsapp;
+package forest.fice.feeld.k.itsapp;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import morita.kazuaki.itsapp.manager.LruCacheSample;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
@@ -19,8 +17,10 @@ import android.widget.TextView;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
-import com.android.volley.toolbox.Volley;
 import com.android.volley.toolbox.ImageLoader.ImageListener;
+import com.android.volley.toolbox.Volley;
+import forest.fice.feeld.k.itsapp.R;
+import forest.fice.feeld.k.itsapp.manager.LruCacheSample;
 
 public class DetailActivity extends ActionBarActivity {
 	

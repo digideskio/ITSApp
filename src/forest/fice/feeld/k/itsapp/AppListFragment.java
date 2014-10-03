@@ -1,26 +1,27 @@
-package morita.kazuaki.itsapp;
+package forest.fice.feeld.k.itsapp;
 
-import morita.kazuaki.itsapp.DetailActivity.DetailFragment;
-import morita.kazuaki.itsapp.entity.FeedEntity;
-import morita.kazuaki.itsapp.entity.FeedEntity.Entry;
-import morita.kazuaki.itsapp.entity.FeedEntityFactory;
-import morita.kazuaki.itsapp.util.Util;
-import static morita.kazuaki.itsapp.util.Util.nonNull;
+import static forest.fice.feeld.k.itsapp.util.Util.nonNull;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v4.app.ListFragment;
 import android.view.View;
 import android.widget.ListView;
 
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.RequestQueue.RequestFilter;
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.samples.apps.iosched.util.LogUtils;
+
+import forest.fice.feeld.k.itsapp.DetailActivity.DetailFragment;
+import forest.fice.feeld.k.itsapp.entity.FeedEntity;
+import forest.fice.feeld.k.itsapp.entity.FeedEntityFactory;
+import forest.fice.feeld.k.itsapp.entity.FeedEntity.Entry;
 
 /**
  * A fragment representing a list of Items.
@@ -38,11 +39,11 @@ public class AppListFragment extends ListFragment {
 
 	// TODO: Rename and change types of parameters
 	private String mParam1;
-	private String mParam2;
+//	private String mParam2;
 
 	private RequestQueue mQueue;
 
-	private OnFragmentInteractionListener mListener;
+//	private OnFragmentInteractionListener mListener;
 
 	private FeedEntity entity;
 
@@ -78,7 +79,7 @@ public class AppListFragment extends ListFragment {
 		}
 
 		mParam1 = bundle.getString(ARG_PARAM1);
-		mParam2 = bundle.getString(ARG_PARAM2);
+//		mParam2 = bundle.getString(ARG_PARAM2);
 
 		mQueue = Volley.newRequestQueue(getActivity());
 		mQueue.add(new StringRequest(mParam1, new Listener<String>() {
@@ -111,19 +112,26 @@ public class AppListFragment extends ListFragment {
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
-		try {
-			mListener = (OnFragmentInteractionListener) activity;
-		} catch (ClassCastException e) {
-			throw new ClassCastException(activity.toString()
-					+ " must implement OnFragmentInteractionListener");
-		}
+//		try {
+//			mListener = (OnFragmentInteractionListener) activity;
+//		} catch (ClassCastException e) {
+//			throw new ClassCastException(activity.toString()
+//					+ " must implement OnFragmentInteractionListener");
+//		}
 	}
 
 	@Override
 	public void onDetach() {
 		super.onDetach();
-		mListener = null;
-		mQueue.cancelAll(new Object());
+//		mListener = null;
+		mQueue.cancelAll(new RequestFilter() {
+			
+			@Override
+			public boolean apply(Request<?> arg0) {
+				// TODO Auto-generated method stub
+				return true;
+			}
+		});
 	}
 
 	@Override

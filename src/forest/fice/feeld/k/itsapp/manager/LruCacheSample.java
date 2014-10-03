@@ -1,4 +1,4 @@
-package morita.kazuaki.itsapp.manager;
+package forest.fice.feeld.k.itsapp.manager;
 
 import android.graphics.Bitmap;
 import android.support.v4.util.LruCache;

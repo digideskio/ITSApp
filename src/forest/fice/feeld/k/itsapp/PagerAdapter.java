@@ -1,8 +1,9 @@
-package morita.kazuaki.itsapp;
+package forest.fice.feeld.k.itsapp;
 
 import java.util.List;
 
-import morita.kazuaki.itsapp.manager.ContentsManager.Ranking;
+import forest.fice.feeld.k.itsapp.manager.ContentsManager.Ranking;
+
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;

@@ -1,11 +1,11 @@
-package morita.kazuaki.itsapp.manager;
+package forest.fice.feeld.k.itsapp.manager;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ContentsManager {
 	
-	public enum ENUM_TYPE{IOS, MAC
+	public enum ENUM_TYPE{IOS, MAC, IOS_GENRE
 	}
 	
 	private static ContentsManager manager;
@@ -15,6 +15,8 @@ public class ContentsManager {
 		case IOS:
 			return getIOSContentsList();
 		case MAC:
+			return getMacContentsList();
+		case IOS_GENRE:
 		default:
 			return getMacContentsList();
 		}
@@ -38,6 +40,20 @@ public class ContentsManager {
 	}
 	
 	public static List<ContentsManager.Ranking> getMacContentsList() {
+		if(manager == null) {
+			manager = new ContentsManager();
+		}
+		List<ContentsManager.Ranking> rankingList = new ArrayList<ContentsManager.Ranking>();
+		
+		rankingList.add(createRanking("https://itunes.apple.com/jp/rss/topfreemacapps/limit=100/json", "Top Free Mac Apps"));
+		rankingList.add(createRanking("https://itunes.apple.com/jp/rss/topgrossingmacapps/limit=100/json", "Top Grossing mac Apps"));
+		rankingList.add(createRanking("https://itunes.apple.com/jp/rss/topmacapps/limit=100/json", "Top Mac Apps"));
+		rankingList.add(createRanking("https://itunes.apple.com/jp/rss/toppaidmacapps/limit=100/json", "Top Paid Mac Apps"));
+		
+		return rankingList;
+	}
+	
+	public static List<ContentsManager.Ranking> getIOSGenreContentsList() {
 		if(manager == null) {
 			manager = new ContentsManager();
 		}

@@ -1,15 +1,15 @@
-package morita.kazuaki.itsapp;
+package forest.fice.feeld.k.itsapp;
 
-import morita.kazuaki.itsapp.manager.ContentsManager;
-import morita.kazuaki.itsapp.manager.ContentsManager.ENUM_TYPE;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.PagerTabStrip;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import forest.fice.feeld.k.itsapp.R;
+import forest.fice.feeld.k.itsapp.manager.ContentsManager;
+import forest.fice.feeld.k.itsapp.manager.ContentsManager.ENUM_TYPE;
 
 public class ViewPagerFragment extends Fragment {
 	
@@ -49,14 +49,10 @@ public class ViewPagerFragment extends Fragment {
 		 rootView = inflater.inflate(R.layout.view_pager,container, false);
 		
 		viewPager = (ViewPager)rootView.findViewById(R.id.pager);
-		PagerTabStrip tabStrip = (PagerTabStrip)rootView.findViewById(R.id.strip);
+//		PagerTabStrip tabStrip = (PagerTabStrip)rootView.findViewById(R.id.strip);
 		
-		
-		
-		
-		PagerAdapter pagerAdapter = new PagerAdapter(getFragmentManager(), ContentsManager.getContentsList(ENUM_TYPE.valueOf(mParam1)));
+		PagerAdapter pagerAdapter = new PagerAdapter(getChildFragmentManager(), ContentsManager.getContentsList(ENUM_TYPE.valueOf(mParam1)));
 		viewPager.setAdapter(pagerAdapter);
-		
 		return rootView;
 	}
 	

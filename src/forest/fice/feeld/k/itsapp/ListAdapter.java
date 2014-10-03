@@ -1,8 +1,5 @@
-package morita.kazuaki.itsapp;
+package forest.fice.feeld.k.itsapp;
 
-import morita.kazuaki.itsapp.entity.FeedEntity;
-import morita.kazuaki.itsapp.entity.FeedEntity.Entry;
-import morita.kazuaki.itsapp.manager.LruCacheSample;
 import android.content.Context;
 import android.net.Uri;
 import android.view.LayoutInflater;
@@ -16,6 +13,10 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.ImageLoader.ImageListener;
 import com.android.volley.toolbox.Volley;
+import forest.fice.feeld.k.itsapp.R;
+import forest.fice.feeld.k.itsapp.entity.FeedEntity;
+import forest.fice.feeld.k.itsapp.entity.FeedEntity.Entry;
+import forest.fice.feeld.k.itsapp.manager.LruCacheSample;
 
 public class ListAdapter extends ArrayAdapter<FeedEntity.Entry> {
 
